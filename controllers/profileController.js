@@ -35,3 +35,35 @@ exports.getUserProfile = async(req,res) => {
     const profile =  await Profile.findOne({owner: req.params.user_id}).populate('User')
     res.json(profile)
 }
+
+
+exports.addExperience = async(req,res) => {
+    try{
+
+       const profile = await Profile.findOne({owner: req.user._id})
+        if(!profile){
+            return res.status(400).send('All ready Added')
+        }
+        const newExp = {
+            title: req.body.title,
+            companay: req.body.companay,
+            location: req.body.location,
+            from: req.body.from,
+            to: req.body.to,
+            current: req.body.current,
+            description: req.body.description
+        }
+        profile.experience.unshift(newExp)
+        await profile.save()
+        res.json(profile)
+   
+       
+       
+ 
+   
+    }catch(err){
+        res.status(400).send(err)
+ 
+    }
+ 
+ }

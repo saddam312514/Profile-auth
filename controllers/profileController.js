@@ -14,3 +14,24 @@ exports.getProfile = async(req,res) => {
     res.json(profile)
 
 }
+
+exports.addProfile = async(req,res) => {
+   try{
+
+    const profile = new Profile({...req.body, owner: req.user._id})
+
+   
+    await profile.save()
+    res.json(profile)
+
+   }catch(err){
+       res.status(400).send(err)
+
+   }
+
+}
+
+exports.getUserProfile = async(req,res) => {
+    const profile =  await Profile.findOne({owner: req.params.user_id}).populate('User')
+    res.json(profile)
+}

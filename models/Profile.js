@@ -2,13 +2,14 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const ProfileSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+    owner : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        unique: true
     },
     handle: {
         type: String,
-        required: true,
         max: 40
     },
     company: {
@@ -22,11 +23,11 @@ const ProfileSchema = new Schema({
     },
     status: {
         type: String,
-        required: true
+       
     },
     skills: {
         type: [String],
-        required: true
+       
     },
     bio: {
         type: String
@@ -42,14 +43,14 @@ const ProfileSchema = new Schema({
             },
             company: {
                 type: String,
-                required: true
+              
             },
             location: {
                 type: String,
             },
             from: {
                 type: Date,
-                required: true
+               
             },
             to: {
                 type: Date
@@ -71,14 +72,14 @@ const ProfileSchema = new Schema({
             },
             degree: {
                 type: String,
-                required: true
+                
             },
             fieldofstudy: {
                 type: String,
             },
             from: {
                 type: Date,
-                required: true
+                
             },
             to: {
                 type: Date

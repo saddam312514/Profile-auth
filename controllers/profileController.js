@@ -113,3 +113,34 @@ exports.addExperience = async(req,res) => {
     }
  
  }
+
+ exports.deleteExperience = (req,res) => {
+     
+    try{
+
+    const expId = req.params.exp_id
+
+    if(expId) return res.status(400).json('not found id')
+
+
+    Profile.findOne({ owner: req.user.id })
+    .then(profile => {
+      // Get remove index
+      const removeIndex = profile.education
+        .map(item => item.id)
+        .indexOf(req.params.exp_id);
+
+      // Splice out of array
+      profile.experience.splice(removeIndex, 1);
+
+      // Save
+      profile.save().then(profile => res.json(profile));
+    })
+    .catch(err => res.status(404).json(err));
+
+    }catch(err){
+        res.status(403).json(err)
+    }
+    
+
+ }

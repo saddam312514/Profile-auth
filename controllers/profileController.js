@@ -120,7 +120,7 @@ exports.addExperience = async(req,res) => {
 
     const expId = req.params.exp_id
 
-    if(expId) return res.status(400).json('not found id')
+    if(!expId) return res.status(400).json('not found id')
 
 
     Profile.findOne({ owner: req.user.id })

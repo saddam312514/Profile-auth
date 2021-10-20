@@ -8,6 +8,7 @@
  const userRoute = require('./routes/user')
  const noteRoute = require('./routes/note')
  const profileRoute = require('./routes/profile')
+ const postRoute = require('./routes/post')
 
  require('dotenv').config({
     path: './config/key.env'
@@ -30,6 +31,7 @@ app.use('/api', userRoute)
 
 app.use('/api', noteRoute)
 app.use('/api', profileRoute)
+app.use('/api', postRoute)
 
 
 // connection to database
